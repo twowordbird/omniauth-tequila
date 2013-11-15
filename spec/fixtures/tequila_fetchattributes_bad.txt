@@ -1,0 +1,16 @@
+version=2.1.2
+firstname=Chris
+provider=
+specrequire=group=my-group
+status=ok
+speckey=esu3r5e6fy0c616af80y5ienzrj2n6x8
+email=chris@twowordbird.com
+group=my-group
+requesthost=128.128.128.128
+authstrength=1
+org=MYORG
+specuid=999999
+name=Bird
+phone=+41 21 9999999
+host=128.128.128.129
+authorig=cookie

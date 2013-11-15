@@ -1,20 +1,17 @@
-# OmniAuth CAS Strategy [![Gem Version][version_badge]][version] [![Build Status][travis_status]][travis]
+# OmniAuth Tequila Strategy [![Gem Version][version_badge]][version] [![Build Status][travis_status]][travis]
 
-[version_badge]: https://badge.fury.io/rb/omniauth-cas.png
-[version]: http://badge.fury.io/rb/omniauth-cas
-[travis]: http://travis-ci.org/dlindahl/omniauth-cas
-[travis_status]: https://secure.travis-ci.org/dlindahl/omniauth-cas.png
+[version_badge]: https://badge.fury.io/rb/omniauth-tequila.png
+[version]: http://badge.fury.io/rb/omniauth-tequila
+[travis]: http://travis-ci.org/twowordbird/omniauth-tequila
+[travis_status]: https://secure.travis-ci.org/twowordbird/omniauth-tequila.png
 
-This is a OmniAuth 1.0 compatible port of the previously available
-[OmniAuth CAS strategy][old_omniauth_cas] that was bundled with OmniAuth 0.3.
-
-[View the documentation][document_up]
+This is an OmniAuth 1.0 compatible strategy that authenticates via EPFL's [Tequila][tequila] protocol, structured after [omniauth-cas][omniauth_cas]. By default, it connects to EPFL's Tequila server, but it is fully configurable.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'omniauth-cas'
+    gem 'omniauth-tequila'
 
 And then execute:
 
@@ -22,7 +19,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install omniauth-cas
+    $ gem install omniauth-tequila
 
 ## Usage
 
@@ -30,49 +27,22 @@ Use like any other OmniAuth strategy:
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :cas, host: 'cas.yourdomain.com'
+  provider :tequila #, :option => value, ...
 end
 ```
 
 ### Configuration Options
 
-#### Required
+OmniAuth Tequila authenticates with the EPFL server over SSL by default. However, it supports the following configuration options:
 
-OmniAuth CAS requires at least one of the following two configuration options:
-
-  * `url` - Defines the URL of your CAS server (i.e. `http://example.org:8080`)
-  * `host` - Defines the host of your CAS server. Optional if using `url`
-  * `login_url` - Defines the URL used to prompt users for their login information. Defaults to `/login`
-    If no `host` is configured, the host application's domain will be used.
-
-#### Optional
-
-Other configuration options:
-
-  * `port` - The port to use for your configured CAS `host`. Optional if using `url`
-  * `ssl` - TRUE to connect to your CAS server over SSL. Optional if using `url`
-  * `service_validate_url` - The URL to use to validate a user. Defaults to `'/serviceValidate'`
-  * `logout_url` - The URL to use to logout a user. Defaults to `'/logout'`
-  * `uid_field` - The user data attribute to use as your user's unique identifier. Defaults to `'user'` (which usually contains the user's login name)
-  * `ca_path` - Optional when `ssl` is `true`. Sets path of a CA certification directory. See [Net::HTTP][net_http] for more details
+  * `host` - Defines the host of your Tequila server
+  * `path` - Defines the URL relative to the host that the application sits behind
+  * `port` - The port to use for your configured Tequila `host`
+  * `ssl` - true to connect to your Tequila server over SSL
   * `disable_ssl_verification` - Optional when `ssl` is true. Disables verification.
-
-## Migrating from OmniAuth 0.3
-
-Given the following OmniAuth 0.3 configuration:
-
-```ruby
-provider :CAS, cas_server: 'https://cas.example.com/cas/'
-```
-
-Your new settings should look similar to this:
-
-```ruby
-provider :cas,
-         host:      'cas.example.com',
-         login_url: '/cas/login',
-  	     service_validate_url: '/cas/serviceValidate'
-```
+  * `ca_path` - Optional when `ssl` is `true`. Sets path of a CA certification directory. See [Net::HTTP][net_http] for more details
+  * `uid_field` - The user data attribute to use as your user's unique identifier. Defaults to `'uniqueid'` (which contains the user's SCIPER number when using EPFL's Tequila server)
+  * `request_info` - Hash that maps user attributes from Tequila to the [OmniAuth schema][omniauth_schema]. Defaults to `{ :name => 'displayname' }` (which is the user's full name when using EPFL's Tequila server)
 
 If you encounter problems wih SSL certificates you may want to set the `ca_path` parameter or activate `disable_ssl_verification` (not recommended).
 
@@ -88,10 +58,9 @@ If you encounter problems wih SSL certificates you may want to set the `ca_path`
 
 Special thanks go out to the following people
 
-  * Phillip Aldridge (@iterateNZ) and JB Barth (@jbbarth) for helping out with Issue #3
-  * Elber Ribeiro (@dynaum) for Ubuntu SSL configuration support
-  * @rbq for README updates and OmniAuth 0.3 migration guide
+  * Derek Lindahl (@dlindahl) and all the authors of [omniauth-cas][omniauth_cas]
 
-[old_omniauth_cas]: https://github.com/intridea/omniauth/blob/0-3-stable/oa-enterprise/lib/omniauth/strategies/cas.rb
-[document_up]: http://dlindahl.github.com/omniauth-cas/
+[tequila]: http://tequila.epfl.ch/
+[omniauth_cas]: http://github.com/dlindahl/omniauth-cas
+[omniauth_schema]: https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema
 [net_http]: http://ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html

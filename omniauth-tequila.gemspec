@@ -1,22 +1,24 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/omniauth/cas/version', __FILE__)
+require File.expand_path('../lib/omniauth/tequila/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Derek Lindahl"]
-  gem.email         = ["dlindahl@customink.com"]
-  # gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{CAS Strategy for OmniAuth}
-  gem.homepage      = "https://github.com/dlindahl/omniauth-cas"
+  gem.authors       = ['Chris Bird']
+  gem.email         = ['chris@twowordbird.com']
+  gem.description   = <<-EOF
+  This is an OmniAuth 1.0 compatible strategy that authenticates via EPFL's Tequila protocol. By default, it connects to EPFL's Tequila server, but it is fully configurable.
+EOF
+  gem.summary       = %q{Tequila Strategy for OmniAuth}
+  gem.homepage      = 'https://github.com/twowordbird/omniauth-tequila'
+  gem.license       = 'MIT'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.name          = "omniauth-cas"
-  gem.require_paths = ["lib"]
-  gem.version       = Omniauth::Cas::VERSION
+  gem.name          = 'omniauth-tequila'
+  gem.require_paths = ['lib']
+  gem.version       = Omniauth::Tequila::VERSION
 
   gem.add_dependency 'omniauth',                '~> 1.1.0'
-  gem.add_dependency 'nokogiri',                '~> 1.6'
   gem.add_dependency 'addressable',             '~> 2.3'
 
   gem.add_development_dependency 'rake',        '~> 0.9'
