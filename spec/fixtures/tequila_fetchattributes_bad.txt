@@ -1,0 +1,16 @@
+version=2.1.2
+firstname=William Christopher
+provider=
+specrequire=group=disal-git
+status=ok
+speckey=esu3r5e6fy0c616af80y5ienzrj2n6x8
+email=william.evans@epfl.ch
+group=disal-git
+requesthost=128.178.90.148
+authstrength=1
+org=EPFL
+specuid=183256
+name=Evans
+phone=+41 21 6935797
+host=128.178.195.240
+authorig=cookie

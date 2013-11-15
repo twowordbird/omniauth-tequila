@@ -12,6 +12,6 @@ SimpleCov.start
 
 require 'rack/test'
 require 'webmock/rspec'
-require 'omniauth-cas'
+require 'omniauth-tequila'
 
 OmniAuth.config.logger = Logger.new( '/dev/null' )
